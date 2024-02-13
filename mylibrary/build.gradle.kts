@@ -43,13 +43,15 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                version = project.version.toString()
-            }
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            version = "1.0"
+            artifact("$buildDir/outputs/aar/mylibrary-release.aar")
         }
     }
+}
+
+tasks.named("publishToMavenLocal") {
+    mustRunAfter("assembleRelease")
 }
