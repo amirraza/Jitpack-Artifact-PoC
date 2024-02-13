@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -10,7 +12,8 @@ android {
 
     defaultConfig {
         minSdk = 24
-        version = "1.3"
+        version = "1.4"
+        archivesName = "myLib"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -48,8 +51,8 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "com.github.amirraza"
             artifactId = "myLib"
-            version = "1.3"
-            artifact("$buildDir/outputs/aar/mylibrary-release.aar")
+            version = "1.4"
+            artifact("$buildDir/outputs/aar/myLib-release.aar")
         }
     }
 }
