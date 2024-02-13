@@ -52,6 +52,6 @@ publishing {
     }
 }
 
-tasks.named("publishToMavenLocal") {
+tasks.named("publishMavenPublicationToMavenLocal") {
     mustRunAfter("assembleRelease")
 }
