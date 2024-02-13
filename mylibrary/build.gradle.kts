@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-        version = "1.0"
+        version = "1.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -46,7 +46,9 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            version = "1.2"
+            groupId = "com.github.amirraza"
+            artifactId = "myLib"
+            version = "1.3"
             artifact("$buildDir/outputs/aar/mylibrary-release.aar")
         }
     }
