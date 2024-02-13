@@ -45,13 +45,13 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            version = "1.0"
+        create<MavenPublication>("mavenJava") {
+            version = "1.2"
             artifact("$buildDir/outputs/aar/mylibrary-release.aar")
         }
     }
 }
 
-tasks.named("publishMavenPublicationToMavenLocal") {
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
     mustRunAfter("assembleRelease")
 }
