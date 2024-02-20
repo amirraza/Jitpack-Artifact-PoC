@@ -55,8 +55,7 @@ publishing {
             artifact("$buildDir/outputs/aar/myLib-release.aar")
         }
     }
-}
-
-tasks.named("publish") {
-    mustRunAfter("assembleRelease")
+    repositories {
+        mavenLocal()
+    }
 }
