@@ -53,15 +53,10 @@ publishing {
             artifactId = "myLib"
             version = "1.5"
             artifact("$buildDir/outputs/aar/myLib-release.aar")
-            pom.withXml {
-                asNode().appendNode("packaging", "aar")
-                asNode().appendNode("dependencies")
-                asNode().appendNode("build")
-            }
         }
     }
 }
 
-tasks.named("publishMavenJavaPublicationToMavenLocal") {
+tasks.named("publish") {
     mustRunAfter("assembleRelease")
 }
