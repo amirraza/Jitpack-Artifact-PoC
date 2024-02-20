@@ -55,7 +55,8 @@ publishing {
             artifact("$buildDir/outputs/aar/myLib-release.aar")
         }
     }
-    repositories {
-        mavenLocal()
-    }
+}
+
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    mustRunAfter("bundleReleaseAar")
 }
