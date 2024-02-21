@@ -46,7 +46,7 @@ publishing {
             groupId = "com.amirraza.artifact.poc"
             artifactId = "myLib"
             version = project.version.toString()
-            artifact("$buildDir/outputs/aar/${archivesName.get()}-release.aar")
+            artifact("$buildDir/outputs/aar/${archivesName.get()}-debug.aar")
         }
         repositories {
             maven {
