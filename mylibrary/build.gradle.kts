@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
+import java.util.function.Predicate
 
 plugins {
     id("com.android.library")
@@ -54,7 +55,11 @@ afterEvaluate {
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
                 // Exclude sources JAR
-                removeIf { it.name.endsWith("sources.jar") }
+                val filteredArtifacts = artifacts.filterNot { artifact ->
+                    artifact.extension == "jar"
+                }
+                artifacts.clear()
+                artifacts.addAll(filteredArtifacts)
             }
         }
     }
