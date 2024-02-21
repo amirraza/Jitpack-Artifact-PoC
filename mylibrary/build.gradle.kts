@@ -39,9 +39,30 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    /*publishing {
+        singleVariant("release") {
+            withJavadocJar()
+        }
+    }*/
 //    tasks.withType<Jar> {
 //        exclude("*sources.jar")
 //    }
+}
+
+    publishing {
+        publications {
+            create<MavenPublication>("mavenJava") {
+//                from(components["release"])
+                groupId = "com.example.mylibrary"
+                artifactId = project.archivesName.get()
+                version = project.version.toString()
+                artifact("$buildDir/outputs/aar/myLib-release.aar")
+            }
+        }
+    }
+
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    mustRunAfter("assembleRelease")
 }
 
 dependencies {
@@ -59,16 +80,4 @@ dependencies {
 //    }
 //}
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                artifactId = project.archivesName.get()
-                version = project.version.toString()
-                artifact("$buildDir/outputs/aar/myLib-release.aar")
-            }
-        }
-    }
-}
 
