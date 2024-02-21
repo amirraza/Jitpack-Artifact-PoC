@@ -40,6 +40,25 @@ android {
 //    }
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "com.amirraza.artifact.poc"
+            artifactId = "myLib"
+            version = project.version.toString()
+            artifact("$buildDir/outputs/aar/${archivesName.get()}-release.aar")
+        }
+        repositories {
+            maven {
+                url = uri("https://jitpack.io")
+            }
+        }
+    }
+}
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    mustRunAfter("assembleRelease")
+}
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -55,33 +74,3 @@ dependencies {
 //    }
 //}
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-//            from(components["android"])
-            // Exclude sources.jar
-            artifactId = "myLib"
-            version = project.version.toString()
-
-            artifacts {
-                removeIf { it.name.endsWith("sources.jar") }
-            }
-        }
-    }
-}
-/*
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            groupId = "com.amirraza.artifact.poc"
-            artifactId = "myLib"
-            version = project.version.toString()
-            artifact("$buildDir/outputs/aar/${archivesName.get()}-release.aar")
-        }
-
-    }
-}
-tasks.named("publishMavenJavaPublicationToMavenLocal") {
-    mustRunAfter("assembleRelease")
-}
-*/
