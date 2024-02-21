@@ -43,7 +43,7 @@ android {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            groupId = "com.amirraza.artifact.poc"
+            groupId = "com.example.mylibrary"
             artifactId = "myLib"
             version = project.version.toString()
             artifact("$buildDir/outputs/aar/${archivesName.get()}-debug.aar")
