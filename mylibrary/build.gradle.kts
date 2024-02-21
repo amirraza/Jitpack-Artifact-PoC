@@ -56,7 +56,7 @@ publishing {
     }
 }
 tasks.named("publishMavenJavaPublicationToMavenLocal") {
-    mustRunAfter("assembleRelease")
+    mustRunAfter("assemble")
 }
 
 dependencies {
