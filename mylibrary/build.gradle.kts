@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-        version = "1.5"
+        version = "1.8"
         archivesName = "myLib"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -46,19 +46,16 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
-/*
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            groupId = "com.github.amirraza"
-            artifactId = "myLib"
-            version = "1.5"
-            artifact("$buildDir/outputs/aar/myLib-release.aar")
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                artifactId = project.archivesName.get()
+                version = project.version.toString()
+                // Exclude sources JAR
+                removeIf { it.name.endsWith("sources.jar") }
+            }
         }
     }
-}
-*/
-
-tasks.named("publish") {
-    mustRunAfter("assembleRelease")
 }
