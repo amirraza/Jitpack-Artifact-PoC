@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+//    tasks.withType<Jar>() {
+//        exclude("*sources.jar")
+//    }
 }
 
 dependencies {
@@ -51,17 +54,19 @@ dependencies {
 //        this.enabled = false
 //    }
 //}
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.amirraza.jitpack.poc"
-                artifactId = project.archivesName.get()
-                version = project.version.toString()
-//                artifact("$buildDir/outputs/aar/myLib-release.aar")
-            }
+
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "com.amirraza.artifact.poc"
+            artifactId = "myLib"
+            version = project.version.toString()
+            artifact("$buildDir/outputs/aar/${archivesName.get()}-release.aar")
         }
+
     }
-//tasks.named("publishMavenJavaPublicationToMavenLocal") {
-//    mustRunAfter("bundleReleaseAar")
-//}
+}
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    mustRunAfter("assembleRelease")
+}
