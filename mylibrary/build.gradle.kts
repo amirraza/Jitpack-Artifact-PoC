@@ -46,11 +46,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
-tasks.whenTaskAdded {
-    if(this.name.endsWith("Jar")) {
-        this.enabled = false
-    }
-}
+//tasks.whenTaskAdded {
+//    if(this.name.endsWith("Jar")) {
+//        this.enabled = false
+//    }
+//}
 afterEvaluate {
     publishing {
         publications {
