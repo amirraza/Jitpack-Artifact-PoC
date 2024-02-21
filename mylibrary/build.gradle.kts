@@ -46,7 +46,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
-
+tasks.whenTaskAdded {
+    if(this.name.endsWith("Jar")) {
+        this.enabled = false
+    }
+}
 afterEvaluate {
     publishing {
         publications {
@@ -55,9 +59,6 @@ afterEvaluate {
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
             }
-        }
-        tasks.withType<Jar> {
-            onlyIf { !name.endsWith("sourcesJar") }
         }
     }
 }
