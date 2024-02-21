@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
 //    tasks.withType<Jar> {
 //        exclude("*sources.jar")
 //    }
@@ -46,7 +50,7 @@ publishing {
             groupId = "com.example.mylibrary"
             artifactId = "myLib"
             version = project.version.toString()
-            artifact("$buildDir/outputs/aar/${archivesName.get()}-debug.aar")
+            artifact("$buildDir/outputs/aar/${archivesName.get()}-release.aar")
         }
         repositories {
             maven {
