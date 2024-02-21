@@ -54,13 +54,10 @@ afterEvaluate {
                 from(components["release"])
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
-                // Exclude sources JAR
-                val filteredArtifacts = artifacts.filterNot { artifact ->
-                    artifact.extension == "jar"
-                }
-                artifacts.clear()
-                artifacts.addAll(filteredArtifacts)
             }
+        }
+        tasks.withType<Jar> {
+            onlyIf { !name.endsWith("sourcesJar") }
         }
     }
 }
