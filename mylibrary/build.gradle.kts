@@ -35,9 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-//    tasks.withType<Jar>() {
-//        exclude("*sources.jar")
-//    }
+    tasks.withType<Jar> {
+        exclude("*sources.jar")
+    }
 }
 
 dependencies {
