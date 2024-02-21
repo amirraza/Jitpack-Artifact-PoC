@@ -53,12 +53,12 @@ dependencies {
 //}
     publishing {
         publications {
-            create<MavenPublication>("maven") {
-//                from(components["java"])
+            create<MavenPublication>("release") {
+                from(components["release"])
                 groupId = "com.amirraza.jitpack.poc"
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
-                artifact("$buildDir/outputs/aar/myLib-release.aar")
+//                artifact("$buildDir/outputs/aar/myLib-release.aar")
             }
         }
     }
