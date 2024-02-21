@@ -53,7 +53,6 @@ publishing {
             groupId = "com.github.amirraza"
             artifactId = "myLib"
             version = "1.6"
-            from(components["java"])
         }
     }
 }
