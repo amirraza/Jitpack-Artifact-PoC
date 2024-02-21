@@ -51,19 +51,17 @@ android {
 
     publishing {
         publications {
-            create<MavenPublication>("mavenJava") {
-//                from(components["release"])
+            create<MavenPublication>("maven") {
                 groupId = "com.example.mylibrary"
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
+                pom.packaging = "aar"
                 artifact("$buildDir/outputs/aar/myLib-release.aar")
+//                from(components["release"])
+
             }
         }
     }
-
-tasks.named("publishMavenJavaPublicationToMavenLocal") {
-    mustRunAfter("assembleRelease")
-}
 
 dependencies {
 
