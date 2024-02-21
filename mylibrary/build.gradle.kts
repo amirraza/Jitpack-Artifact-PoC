@@ -46,46 +46,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 
-// Define the publication
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            groupId = "com.github.amirraza"
-            artifactId = "myLib"
-            version = "1.6"
-        }
-    }
-}
-
-// Define tasks to install locally and publish to Maven
-tasks.register("installAndPublish") {
-    dependsOn("install")
-    dependsOn("publishToMavenLocal")
-}
-
-// Optionally, configure any dependencies or other settings
-
-// Define custom task to execute mvn install command
-tasks.register("mvnInstall") {
-    doLast {
-        // Execute mvn install command
-        val result = project.exec {
-            commandLine = listOf("mvn", "install")
-        }
-        if (result.exitValue != 0) {
-            throw GradleException("mvn install command failed")
-        }
-    }
-}
-
-// Optionally, configure the task further if needed
-
-// Execute the custom task
-tasks.named("mvnInstall").configure {
-    dependsOn("installAndPublish")
-}
-
-
 /*
 publishing {
     publications {
