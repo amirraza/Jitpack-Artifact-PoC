@@ -56,6 +56,7 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
+                groupId = "com.amirraza.jitpack.poc"
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
             }
