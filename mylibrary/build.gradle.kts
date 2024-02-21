@@ -55,7 +55,21 @@ dependencies {
 //    }
 //}
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+//            from(components["android"])
+            // Exclude sources.jar
+            artifactId = "myLib"
+            version = project.version.toString()
 
+            artifacts {
+                removeIf { it.name.endsWith("sources.jar") }
+            }
+        }
+    }
+}
+/*
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
@@ -70,3 +84,4 @@ publishing {
 tasks.named("publishMavenJavaPublicationToMavenLocal") {
     mustRunAfter("assembleRelease")
 }
+*/
