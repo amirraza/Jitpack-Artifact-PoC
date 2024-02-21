@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-        version = "1.8"
+        version = "1.9"
         archivesName = "myLib"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -62,4 +62,7 @@ afterEvaluate {
             }
         }
     }
+}
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    mustRunAfter("bundleReleaseAar")
 }
