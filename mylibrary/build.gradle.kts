@@ -53,14 +53,15 @@ dependencies {
 //}
     publishing {
         publications {
-            create<MavenPublication>("mavenJava") {
-//                from(components["release"])
+            create<MavenPublication>("maven") {
+//                from(components["java"])
                 groupId = "com.amirraza.jitpack.poc"
                 artifactId = project.archivesName.get()
                 version = project.version.toString()
+                artifact("$buildDir/outputs/aar/myLib-release.aar")
             }
         }
     }
-tasks.named("publishMavenJavaPublicationToMavenLocal") {
-    mustRunAfter("bundleReleaseAar")
-}
+//tasks.named("publishMavenJavaPublicationToMavenLocal") {
+//    mustRunAfter("bundleReleaseAar")
+//}
