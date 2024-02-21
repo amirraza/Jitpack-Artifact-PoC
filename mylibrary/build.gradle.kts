@@ -57,7 +57,8 @@ publishing {
         }
     }
 }
+*/
 
-tasks.named("publishMavenJavaPublicationToMavenLocal") {
-    mustRunAfter("bundleReleaseAar")
-}*/
+tasks.named("publish") {
+    mustRunAfter("assembleRelease")
+}
