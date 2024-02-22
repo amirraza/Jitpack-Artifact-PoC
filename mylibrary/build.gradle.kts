@@ -73,10 +73,11 @@ publishing {
 //            pom.packaging = "aar"
 //            artifact("$buildDir/outputs/aar/myLib-release.aar")
 
+            artifacts {
+                removeIf { it.name.contains("sources") }
+            }
+
             afterEvaluate {
-                tasks.withType<Jar> {
-                    exclude("*sources.jar")
-                }
                 from(components["release"])
             }
         }
