@@ -64,7 +64,7 @@ android {
     }
 
 tasks.named("publishMavenPublicationToMavenLocal") {
-    finalizedBy("bundleReleaseAar")
+    mustRunAfter("assembleRelease")
 }
 dependencies {
 
