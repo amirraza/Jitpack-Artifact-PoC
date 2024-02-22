@@ -74,6 +74,9 @@ publishing {
 //            artifact("$buildDir/outputs/aar/myLib-release.aar")
 
             afterEvaluate {
+                tasks.withType<Jar> {
+                    exclude("*sources.jar")
+                }
                 from(components["release"])
             }
         }
