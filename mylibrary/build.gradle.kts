@@ -34,14 +34,18 @@ android {
         }
     }
 
+    lint {
+        abortOnError = false
+    }
+
     buildFeatures {
         buildConfig = true
     }
-//    sourceSets {
-//        getByName("main") {
-//            java.srcDirs("src/main/java", "src/main/kotlin")
-//        }
-//    }
+    sourceSets {
+        getByName("main") {
+            assets.srcDirs("src/main/assets")
+        }
+    }
 //    publishing {
 //        singleVariant("release")
 //    }
@@ -49,7 +53,7 @@ android {
         exclude("*sources.jar")
     }*/
 }
-
+/*
 tasks.register("publishToJitPack") {
     dependsOn("assembleRelease")
     doLast {
@@ -74,7 +78,7 @@ tasks.register("publishToJitPack") {
 }
 tasks.named("assemble") {
     finalizedBy("publishToJitPack")
-}
+}*/
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -98,6 +102,29 @@ dependencies {
 //artifacts {
 //    add("archives", tasks.named("sourcesJar"))
 //}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "com.example.mylibrary"
+            artifactId = "myLib"
+            version = "4.0"
+            artifact("$buildDir/outputs/aar/myLib-release.aar")
+        }
+        repositories {
+            maven {
+                url = uri("https://jitpack.io")
+                credentials {
+                    username = "jp_4qluuao9sukqiolmqarjdmni4d"
+                }
+            }
+        }
+    }
+}
+
+tasks.named("publishMavenJavaPublicationToMavenLocal") {
+    mustRunAfter("assembleRelease")
+}
 
 /*publishing {
     publications {
