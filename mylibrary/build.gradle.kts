@@ -46,8 +46,10 @@ android {
             assets.srcDirs("src/main/assets")
         }
     }
-    packagingOptions {
-        this.dex.useLegacyPackaging = true
+    packaging {
+        resources {
+            excludes += "**/META-INF/**"
+        }
     }
 //    publishing {
 //        singleVariant("release")
