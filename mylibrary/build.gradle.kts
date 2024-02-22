@@ -48,7 +48,7 @@ android {
     }
     packaging {
         resources {
-            excludes += "**/META-INF/**"
+            excludes += "/src/main/java"
         }
     }
 //    publishing {
