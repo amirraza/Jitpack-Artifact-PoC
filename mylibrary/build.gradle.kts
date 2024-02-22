@@ -62,7 +62,7 @@ tasks.register("publishToJitPack") {
             "-Dfile=$buildDir/outputs/aar/myLib-release.aar",
             "-Dpackaging=aar",
             "-DgeneratePom=true",
-            "-DpomFile=pom.xml",
+//            "-DpomFile=pom.xml",
             "-DlocalRepositoryPath=.",
             "-DcreateChecksum=true"
         )
@@ -72,7 +72,9 @@ tasks.register("publishToJitPack") {
         }
     }
 }
-
+tasks.named("assemble") {
+    finalizedBy("publishToJitPack")
+}
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
