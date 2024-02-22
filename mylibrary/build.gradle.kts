@@ -21,7 +21,7 @@ android {
         version = "2.0"
         archivesName = "myLib"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+//        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -94,10 +94,10 @@ dependencies {
 //        this.enabled = false
 //    }
 //}
-//tasks.register<Jar>("sourcesJar") {
-//    archiveClassifier.set("sources")
-//    from(android.sourceSets["main"].java.srcDirs)
-//}
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(android.sourceSets["main"].java.srcDirs)
+}
 //
 //artifacts {
 //    add("archives", tasks.named("sourcesJar"))
@@ -109,6 +109,7 @@ publishing {
             groupId = "com.example.mylibrary"
             artifactId = "myLib"
             version = "4.0"
+            artifact(tasks["sourcesJar"])
             artifact("$buildDir/outputs/aar/myLib-release.aar")
         }
         repositories {
