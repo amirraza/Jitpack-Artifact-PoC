@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-        version = "1.9"
+        version = "2.0"
         archivesName = "myLib"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,11 +36,11 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    sourceSets {
+    /*sourceSets {
         getByName("main") {
             java.srcDirs("src/main/java", "src/main/kotlin")
         }
-    }
+    }*/
     /*publishing {
         singleVariant("release") {
             withJavadocJar()
@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
