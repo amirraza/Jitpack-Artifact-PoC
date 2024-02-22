@@ -1,6 +1,9 @@
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import java.util.function.Predicate
+kotlin {
+    jvmToolchain(17)
+}
 
 plugins {
     id("com.android.library")
@@ -29,13 +32,6 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 
     buildFeatures {
         buildConfig = true
@@ -53,9 +49,6 @@ android {
     /*tasks.withType<Jar> {
         exclude("*sources.jar")
     }*/
-    tasks.withType<Jar> {
-        this.enabled = false
-    }
 }
 
 dependencies {
