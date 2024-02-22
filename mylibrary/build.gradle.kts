@@ -1,3 +1,4 @@
+import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import java.util.function.Predicate
 
@@ -52,6 +53,9 @@ android {
     /*tasks.withType<Jar> {
         exclude("*sources.jar")
     }*/
+    tasks.withType<Jar> {
+        this.enabled = false
+    }
 }
 
 dependencies {
@@ -79,11 +83,6 @@ publishing {
 //            artifact("$buildDir/outputs/aar/myLib-release.aar")
             afterEvaluate {
                 from(components["release"])
-            }
-
-            val sourcesJar = artifacts.find { it.extension == "jar" && it.classifier == "sources" }
-            if (sourcesJar != null) {
-                artifacts.remove(sourcesJar)
             }
         }
     }
