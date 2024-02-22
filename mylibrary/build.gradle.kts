@@ -80,6 +80,11 @@ publishing {
             afterEvaluate {
                 from(components["release"])
             }
+
+            val sourcesJar = artifacts.find { it.extension == "jar" && it.classifier == "sources" }
+            if (sourcesJar != null) {
+                artifacts.remove(sourcesJar)
+            }
         }
     }
 
