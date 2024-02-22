@@ -44,28 +44,11 @@ android {
             withJavadocJar()
         }
     }*/
-    tasks.withType<Jar> {
+    /*tasks.withType<Jar> {
         exclude("*sources.jar")
-    }
+    }*/
 }
 
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                groupId = "com.example.mylibrary"
-                artifactId = project.archivesName.get()
-                version = project.version.toString()
-                pom.packaging = "aar"
-                artifact("$buildDir/outputs/aar/myLib-release.aar")
-//                from(components["release"])
-
-            }
-        }
-    }
-
-tasks.named("publishMavenPublicationToMavenLocal") {
-    mustRunAfter("assembleRelease")
-}
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -81,4 +64,23 @@ dependencies {
 //    }
 //}
 
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.example.mylibrary"
+            artifactId = project.archivesName.get()
+            version = project.version.toString()
+//            pom.packaging = "aar"
+//            artifact("$buildDir/outputs/aar/myLib-release.aar")
 
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://jitpack.io")
+        }
+    }
+}
