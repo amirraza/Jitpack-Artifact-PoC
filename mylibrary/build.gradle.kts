@@ -71,8 +71,8 @@ publishing {
             groupId = "com.example.mylibrary"
             artifactId = project.archivesName.get()
             version = project.version.toString()
-//            pom.packaging = "aar"
-//            artifact("$buildDir/outputs/aar/myLib-release.aar")
+            pom.packaging = "aar"
+            artifact("$buildDir/outputs/aar/myLib-release.aar")
             afterEvaluate {
                 from(components["release"])
             }
