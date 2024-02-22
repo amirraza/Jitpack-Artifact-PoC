@@ -72,14 +72,14 @@ publishing {
             version = project.version.toString()
 //            pom.packaging = "aar"
 //            artifact("$buildDir/outputs/aar/myLib-release.aar")
-
-            artifacts {
-                removeIf { it.name.contains("sources") }
-            }
-
             afterEvaluate {
                 from(components["release"])
             }
+        }
+    }
+    tasks.withType<Jar>().configureEach {
+        if (name.endsWith("sourcesJar")) {
+            enabled = false
         }
     }
     repositories {
