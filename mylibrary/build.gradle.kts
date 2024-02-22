@@ -44,9 +44,9 @@ android {
             withJavadocJar()
         }
     }*/
-//    tasks.withType<Jar> {
-//        exclude("*sources.jar")
-//    }
+    tasks.withType<Jar> {
+        exclude("*sources.jar")
+    }
 }
 
     publishing {
