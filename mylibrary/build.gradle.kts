@@ -89,22 +89,23 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
-//tasks.whenTaskAdded {
-//    if(this.name.endsWith("Jar")) {
-//        this.enabled = false
-//    }
-//}
+tasks.whenTaskAdded {
+    if(this.name.endsWith("Jar")) {
+        this.enabled = false
+    }
+}
 tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
     from(android.sourceSets["main"].java.srcDirs)
 }
-//
-//artifacts {
-//    add("archives", tasks.named("sourcesJar"))
-//}
+
+artifacts {
+    add("archives", tasks.named("sourcesJar"))
+}
 
 publishing {
     publications {
+
         create<MavenPublication>("mavenJava") {
             groupId = "com.example.mylibrary"
             artifactId = "myLib"
