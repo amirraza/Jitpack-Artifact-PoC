@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.scope.ProjectInfo.Companion.getBaseName
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import java.util.function.Predicate
@@ -36,17 +37,40 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    sourceSets {
-        getByName("main") {
-            java.srcDirs("src/main/java", "src/main/kotlin")
-        }
-    }
-    publishing {
-        singleVariant("release")
-    }
+//    sourceSets {
+//        getByName("main") {
+//            java.srcDirs("src/main/java", "src/main/kotlin")
+//        }
+//    }
+//    publishing {
+//        singleVariant("release")
+//    }
     /*tasks.withType<Jar> {
         exclude("*sources.jar")
     }*/
+}
+
+tasks.register("publishToJitPack") {
+    dependsOn("assembleRelease")
+    doLast {
+        val mavenInstallerCmd = listOf(
+            "mvn",
+            "install:install-file",
+            "-DgroupId=com.example.mylibrary",
+            "-DartifactId=myLib",
+            "-Dversion=4.0",
+            "-Dfile=$buildDir/outputs/aar/myLib-release.aar",
+            "-Dpackaging=aar",
+            "-DgeneratePom=true",
+            "-DpomFile=pom.xml",
+            "-DlocalRepositoryPath=.",
+            "-DcreateChecksum=true"
+        )
+
+        project.exec {
+            commandLine(mavenInstallerCmd)
+        }
+    }
 }
 
 dependencies {
@@ -64,16 +88,16 @@ dependencies {
 //        this.enabled = false
 //    }
 //}
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(android.sourceSets["main"].java.srcDirs)
-}
+//tasks.register<Jar>("sourcesJar") {
+//    archiveClassifier.set("sources")
+//    from(android.sourceSets["main"].java.srcDirs)
+//}
+//
+//artifacts {
+//    add("archives", tasks.named("sourcesJar"))
+//}
 
-artifacts {
-    add("archives", tasks.named("sourcesJar"))
-}
-
-publishing {
+/*publishing {
     publications {
         register<MavenPublication>("mavenJava") {
             groupId = "com.example.mylibrary"
@@ -92,4 +116,4 @@ publishing {
             url = uri("https://jitpack.io")
         }
     }
-}
+}*/
