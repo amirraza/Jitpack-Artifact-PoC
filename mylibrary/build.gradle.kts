@@ -36,11 +36,11 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    /*sourceSets {
+    sourceSets {
         getByName("main") {
             java.srcDirs("src/main/java", "src/main/kotlin")
         }
-    }*/
+    }
     publishing {
         singleVariant("release")
     }
@@ -64,6 +64,14 @@ dependencies {
 //        this.enabled = false
 //    }
 //}
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(android.sourceSets["main"].java.srcDirs)
+}
+
+artifacts {
+    add("archives", tasks.named("sourcesJar"))
+}
 
 publishing {
     publications {
@@ -72,7 +80,7 @@ publishing {
             artifactId = project.archivesName.get()
             version = project.version.toString()
             pom.packaging = "aar"
-            artifact("$buildDir/outputs/aar/myLib-release.aar")
+//            artifact("$buildDir/outputs/aar/myLib-release.aar")
             afterEvaluate {
                 from(components["release"])
             }
