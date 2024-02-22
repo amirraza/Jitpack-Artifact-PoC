@@ -41,11 +41,9 @@ android {
             java.srcDirs("src/main/java", "src/main/kotlin")
         }
     }*/
-    /*publishing {
-        singleVariant("release") {
-            withJavadocJar()
-        }
-    }*/
+    publishing {
+        singleVariant("release")
+    }
     /*tasks.withType<Jar> {
         exclude("*sources.jar")
     }*/
