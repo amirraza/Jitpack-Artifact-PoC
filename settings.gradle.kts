@@ -16,6 +16,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Jitpack Artifact PoC"
+rootProject.name = "Jitpack-Artifact-PoC"
 include(":app")
 include(":mylibrary")

@@ -39,6 +39,11 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    sourceSets {
+        getByName("main") {
+            java.srcDirs("")
+        }
+    }
     /*publishing {
         singleVariant("release") {
             withJavadocJar()
@@ -77,11 +82,7 @@ publishing {
             }
         }
     }
-    tasks.withType<Jar>().configureEach {
-        if (name.endsWith("sourcesJar")) {
-            enabled = false
-        }
-    }
+
     repositories {
         maven {
             url = uri("https://jitpack.io")
