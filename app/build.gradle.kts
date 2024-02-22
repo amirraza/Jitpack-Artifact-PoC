@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -58,17 +59,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
     }
-//    packaging {
-//        resources {
-//            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-//        }
-//    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
 
     implementation(project(":mylibrary"))
-//    implementation("com.github.amirraza:Jitpack-Artifact-PoC:4ed18f7")
+//    implementation("com.github.amirraza:Jitpack-Artifact-PoC:20e1ae4")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
