@@ -41,7 +41,7 @@ android {
     }
     sourceSets {
         getByName("main") {
-            java.srcDirs("")
+            java.srcDirs("src/main/java", "src/main/kotlin")
         }
     }
     /*publishing {

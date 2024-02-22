@@ -56,7 +56,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {
@@ -68,7 +68,7 @@ android {
 dependencies {
 
     implementation(project(":mylibrary"))
-//    implementation("com.github.amirraza:Jitpack-Artifact-PoC:e1aab4d")
+//    implementation("com.github.amirraza:Jitpack-Artifact-PoC:4ed18f7")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
