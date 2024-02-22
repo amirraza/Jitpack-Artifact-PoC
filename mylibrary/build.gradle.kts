@@ -44,13 +44,14 @@ android {
     sourceSets {
         getByName("main") {
             assets.srcDirs("src/main/assets")
+            java.srcDirs("src/main/java")
         }
     }
-    packaging {
-        resources {
-            excludes += "/src/main/java"
-        }
-    }
+//    packaging {
+//        resources {
+//            excludes += "/src/main/java"
+//        }
+//    }
 //    publishing {
 //        singleVariant("release")
 //    }
@@ -99,11 +100,13 @@ dependencies {
 //        this.enabled = false
 //    }
 //}
-//tasks.register<Jar>("sourcesJar") {
-//    archiveClassifier.set("sources")
-//    from(android.sourceSets["main"].java.srcDirs)
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(android.sourceSets["main"].java.srcDirs)
+}
+//java {
+//    withSourcesJar()
 //}
-//
 //artifacts {
 //    add("archives", tasks.named("sourcesJar"))
 //}
@@ -115,7 +118,7 @@ publishing {
             groupId = "com.example.mylibrary"
             artifactId = "myLib"
             version = "4.0"
-//            artifact(tasks["sourcesJar"])
+            artifact(tasks["sourcesJar"])
             artifact("$buildDir/outputs/aar/myLib-release.aar")
         }
         repositories {
