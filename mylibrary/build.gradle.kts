@@ -75,7 +75,7 @@ artifacts {
 
 publishing {
     publications {
-        register<MavenPublication>("release") {
+        register<MavenPublication>("mavenJava") {
             groupId = "com.example.mylibrary"
             artifactId = project.archivesName.get()
             version = project.version.toString()
