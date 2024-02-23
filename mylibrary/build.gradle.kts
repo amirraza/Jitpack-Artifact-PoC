@@ -48,7 +48,7 @@ android {
         }
     }
 
-    project.gradle.addBuildListener(object : BuildListener {
+    /*project.gradle.addBuildListener(object : BuildListener {
 
         override fun settingsEvaluated(settings: Settings) {}
 
@@ -65,7 +65,7 @@ android {
                 }
             }
         }
-    })
+    })*/
 
 //    packaging {
 //        resources {
@@ -135,13 +135,19 @@ dependencies {
 //    add("archives", tasks.named("sourcesJar"))
 //}
 
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(android.sourceSets.getByName("main").java.srcDirs)
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             groupId = "com.example.mylibrary"
             artifactId = "myLib"
             version = "4.0"
-//            artifact(tasks["sourcesJar"])
+//            artifact(sourcesJar)
             artifact("$buildDir/outputs/aar/myLib-release.aar")
             /*pom.withXml {
                 val allDeps = project.configurations.runtimeOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
