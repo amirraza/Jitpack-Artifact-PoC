@@ -44,7 +44,6 @@ android {
     sourceSets {
         getByName("main") {
             assets.srcDirs("src/main/assets")
-            java.srcDirs("src/main/java")
         }
     }
 //    packaging {
@@ -100,10 +99,10 @@ dependencies {
 //        this.enabled = false
 //    }
 //}
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(android.sourceSets["main"].java.srcDirs)
-}
+//tasks.register<Jar>("sourcesJar") {
+//    archiveClassifier.set("sources")
+//    from(android.sourceSets["main"].java.srcDirs)
+//}
 //java {
 //    withSourcesJar()
 //}
@@ -113,13 +112,37 @@ tasks.register<Jar>("sourcesJar") {
 
 publishing {
     publications {
-
         create<MavenPublication>("mavenJava") {
             groupId = "com.example.mylibrary"
             artifactId = "myLib"
             version = "4.0"
-            artifact(tasks["sourcesJar"])
+//            artifact(tasks["sourcesJar"])
             artifact("$buildDir/outputs/aar/myLib-release.aar")
+            /*pom.withXml {
+                val allDeps = project.configurations.runtimeOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
+                        project.configurations.compileOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
+                        project.configurations.testRuntimeOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
+                        project.configurations.testCompileOnly.get().resolvedConfiguration.firstLevelModuleDependencies
+
+                val root = asNode()
+
+                root.children()
+                    .filterIsInstance<Node>()
+                    .map { it as Node }
+                    .filter { "dependencies" == it.name() || "dependencyManagement" == it.name() }
+                    .forEach {
+                        root.remove(it)
+                    }
+
+                val ds = root.appendNode("dependencies")
+
+                allDeps.forEach { d ->
+                    val dn = ds.appendNode("dependency")
+                    dn.appendNode("groupId", d.moduleGroup)
+                    dn.appendNode("artifactId", d.name)
+                    dn.appendNode("version", d.moduleVersion)
+                }
+            }*/
         }
         repositories {
             maven {
