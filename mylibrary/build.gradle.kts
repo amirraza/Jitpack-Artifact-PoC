@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -95,7 +95,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 tasks.whenTaskAdded {
-//    var isEnabled = true
     if(name.contains("Source", ignoreCase = false)) {
         enabled = false
     }
