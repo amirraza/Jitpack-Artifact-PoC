@@ -95,9 +95,12 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
 tasks.whenTaskAdded {
+//    var isEnabled = true
     if(name.contains("Source", ignoreCase = false)) {
         enabled = false
     }
+
+    println("task name: ${name} is enabled? ${enabled}" )
 }
 //tasks.register<Jar>("sourcesJar") {
 //    archiveClassifier.set("sources")
