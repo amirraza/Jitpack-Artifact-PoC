@@ -58,7 +58,7 @@ android {
 
         override fun buildFinished(result: BuildResult) {
 
-            arrayListOf("./build", "./build/outputs", "./build/outputs/aar").forEach {itBig ->
+            arrayListOf("./mylibrary/build", "./mylibrary/build/outputs", "./mylibrary/build/outputs/aar").forEach {itBig ->
                 val file = File(itBig)
                 file.list().forEach { itSmall ->
                     println("itBig -> $itBig file name : $itSmall")
