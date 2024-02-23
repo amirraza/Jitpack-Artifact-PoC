@@ -2,6 +2,7 @@ import com.android.build.gradle.internal.scope.ProjectInfo.Companion.getBaseName
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import java.util.function.Predicate
+
 kotlin {
     jvmToolchain(17)
 }
@@ -46,6 +47,26 @@ android {
             assets.srcDirs("src/main/assets")
         }
     }
+
+    project.gradle.addBuildListener(object : BuildListener {
+
+        override fun settingsEvaluated(settings: Settings) {}
+
+        override fun projectsLoaded(gradle: Gradle) {}
+
+        override fun projectsEvaluated(gradle: Gradle) {}
+
+        override fun buildFinished(result: BuildResult) {
+
+            arrayListOf("./build", "./build/outputs", "./build/outputs/aar").forEach {itBig ->
+                val file = File(itBig)
+                file.list().forEach { itSmall ->
+                    println("itBig -> $itBig file name : $itSmall")
+                }
+            }
+        }
+    })
+
 //    packaging {
 //        resources {
 //            excludes += "/src/main/java"
@@ -94,13 +115,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
-tasks.configureEach {
-    if(name.contains("Source", ignoreCase = false)) {
-        enabled = false
-    }
+//tasks.whenTaskAdded {
+//    if(name.contains("Source", ignoreCase = false)) {
+//        enabled = false
+//    }
+//
+//    println("task name: ${name} is enabled? ${enabled}" )
+//}
 
-    println("task name: ${name} is enabled? ${enabled}" )
-}
+
 //tasks.register<Jar>("sourcesJar") {
 //    archiveClassifier.set("sources")
 //    from(android.sourceSets["main"].java.srcDirs)
