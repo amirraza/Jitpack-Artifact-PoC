@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.scope.ProjectInfo.Companion.getBaseName
+import com.android.build.gradle.internal.tasks.featuresplit.removeVariantNameFromId
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import java.util.function.Predicate
@@ -136,11 +137,12 @@ dependencies {
 //}
 
 
-val sourcesJar by tasks.creating(Jar::class) {
+/*val sourcesJar by tasks.creating(Jar::class) {
     archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").java.srcDirs)
-}
+}*/
 
+/*
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
@@ -149,7 +151,8 @@ publishing {
             version = "4.0"
 //            artifact(sourcesJar)
             artifact("$buildDir/outputs/aar/myLib-release.aar")
-            /*pom.withXml {
+            */
+/*pom.withXml {
                 val allDeps = project.configurations.runtimeOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
                         project.configurations.compileOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
                         project.configurations.testRuntimeOnly.get().resolvedConfiguration.firstLevelModuleDependencies +
@@ -173,7 +176,8 @@ publishing {
                     dn.appendNode("artifactId", d.name)
                     dn.appendNode("version", d.moduleVersion)
                 }
-            }*/
+            }*//*
+
         }
         repositories {
             maven {
@@ -189,6 +193,7 @@ publishing {
 tasks.named("publishMavenJavaPublicationToMavenLocal") {
     mustRunAfter("assembleRelease")
 }
+*/
 
 /*publishing {
     publications {
@@ -210,3 +215,18 @@ tasks.named("publishMavenJavaPublicationToMavenLocal") {
         }
     }
 }*/
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.example.mylibrary"
+                artifactId = project.archivesName.get()
+                version = project.version.toString()
+            }
+        }
+
+        removeVariantNameFromId("releaseSourcesElements-published")
+    }
+}
