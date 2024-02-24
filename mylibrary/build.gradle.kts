@@ -45,7 +45,8 @@ android {
     }
     sourceSets {
         getByName("main") {
-            assets.srcDirs("src/main/assets")
+            java.srcDir("java")
+            kotlin.srcDir("kotlin")
         }
     }
 
@@ -226,7 +227,5 @@ afterEvaluate {
                 version = project.version.toString()
             }
         }
-
-        removeVariantNameFromId("releaseSourcesElements-published")
     }
 }
